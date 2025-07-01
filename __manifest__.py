@@ -1,34 +1,24 @@
-# -*- coding: utf-8 -*-
+# __manifest__.py
 {
-    'name': "CalendarTimesheetSync",
-
-    'summary': "Short (1 phrase/line) summary of the module's purpose",
-
+    'name': 'Calendar Timesheet Sync',
+    'version': '17.0.1.0.0',
+    'category': 'Tools',
+    'summary': 'Log calendar events into timesheet using the OCA calendar wizard',
     'description': """
-Long description of module's purpose
-    """,
-
-    'author': "My Company",
-    'website': "https://www.yourcompany.com",
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
-
-    # any module necessary for this one to work correctly
-    'depends': ['base'],
-
-    # always loaded
+Integrates calendar.event with the OCA hr_timesheet_calendar wizard.
+Adds a button on calendar events to log time in the wizard with default values.
+""",
+    'author': 'CodeRomz',
+    'license': 'AGPL-3',
+    'depends': [
+        'calendar',
+        'hr_timesheet_calendar',
+        'project_timesheet_time_control',
+    ],
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'views/calendar_event_views.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
 }
-
