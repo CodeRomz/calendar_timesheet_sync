@@ -23,19 +23,17 @@ class CalendarToTimesheetWizard(models.TransientModel):
                 rec.duration = 0.0
 
     @api.onchange('project_id')
-    def _onchange_project_id(self):
-        if self.task_id and self.task_id.project_id != self.project_id:
-            self.task_id = False
-
     def action_log_time(self):
         self.ensure_one()
 
         if self.duration <= 0:
             raise ValidationError(_("Duration must be greater than zero."))
 
+        date_logged = self.date_time_start.date() if self.date_time_start else fields.Date.today()
+
         self.env['account.analytic.line'].create({
             'name': self.name,
-            'date': self.date_time_start.date(),
+            'date': date_logged,
             'unit_amount': self.duration,
             'project_id': self.project_id.id,
             'task_id': self.task_id.id,
@@ -44,3 +42,4 @@ class CalendarToTimesheetWizard(models.TransientModel):
 
         if self.event_id:
             self.event_id.is_timesheet_logged = True
+
