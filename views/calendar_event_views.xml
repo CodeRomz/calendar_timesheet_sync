@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_calendar_event_form_timesheet" model="ir.ui.view">
-        <field name="name">calendar.event.form.timesheet</field>
-        <field name="model">calendar.event</field>
-        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form/sheet" position="before">
-                <header>
-                    <button name="action_open_timesheet_calendar_wizard"
-                            string="Add in Timesheet"
-                            type="object"
-                            class="btn-primary"
-                            groups="hr_timesheet.group_hr_timesheet_user"/>
-                </header>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_calendar_event_form_inherit_timesheet_button" model="ir.ui.view">
+    <field name="name">calendar.event.form.timesheet.button</field>
+    <field name="model">calendar.event</field>
+    <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//header" position="inside">
+        <button name="action_open_calendar_timesheet_wizard"
+                type="object"
+                string="Add to Timesheet"
+                class="btn-primary"
+                groups="hr_timesheet.group_hr_timesheet_user"/>
+      </xpath>
+    </field>
+  </record>
 </odoo>

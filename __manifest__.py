@@ -12,13 +12,13 @@ Adds a button on calendar events to log time in the wizard with default values.
     'license': 'AGPL-3',
     'depends': [
         'calendar',
-        'hr_timesheet_calendar',
         'project_timesheet_time_control',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/calendar_event_views.xml',
+        'views/calendar_to_timesheet_wizard_view.xml',
     ],
     'installable': True,
     'application': False,
-    'auto_install': False,
 }
