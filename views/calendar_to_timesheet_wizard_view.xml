@@ -10,7 +10,7 @@
           <field name="date_time_end"/>
           <field name="duration" readonly="1"/>
           <field name="project_id"/>
-          <field name="task_id"/>
+          <field name="task_id" domain="[('project_id', '=', project_id)]"/>
         </group>
         <footer>
           <button string="Log Time" type="object" name="action_log_time" class="btn-primary"/>
