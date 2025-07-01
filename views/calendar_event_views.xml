@@ -1,16 +1,17 @@
-<!-- views/calendar_event_views.xml -->
 <odoo>
   <record id="view_calendar_event_form_timesheet" model="ir.ui.view">
     <field name="name">calendar.event.form.timesheet</field>
     <field name="model">calendar.event</field>
     <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
     <field name="arch" type="xml">
-      <xpath expr="//form/header" position="inside">
-        <button name="action_open_timesheet_calendar_wizard"
-                string="Add in Timesheet"
-                type="object"
-                class="btn-primary"
-                groups="hr_timesheet.group_hr_timesheet_user"/>
+      <xpath expr="//form/sheet" position="before">
+        <header>
+          <button name="action_open_timesheet_calendar_wizard"
+                  string="Add in Timesheet"
+                  type="object"
+                  class="btn-primary"
+                  groups="hr_timesheet.group_hr_timesheet_user"/>
+        </header>
       </xpath>
     </field>
   </record>
