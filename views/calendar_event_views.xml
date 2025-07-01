@@ -11,7 +11,7 @@
                             <button name="action_open_calendar_timesheet_wizard"
                                     type="object"
                                     string="Add to Timesheet"
-                                    class="btn btn-primary"
+                                    class="btn-primary"
                                     groups="hr_timesheet.group_hr_timesheet_user"
                                     invisible="is_timesheet_logged"/>
                         </div>
