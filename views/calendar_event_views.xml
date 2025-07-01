@@ -1,4 +1,3 @@
-<!-- calendar_timesheet_sync/views/calendar_event_views.xml -->
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_calendar_event_form_timesheet" model="ir.ui.view">
