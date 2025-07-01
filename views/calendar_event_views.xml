@@ -14,7 +14,7 @@
 
       </xpath>
       <xpath expr="//sheet/group" position="inside">
-        <field name="is_timesheet_logged" readonly="1"/>
+        <field name="is_timesheet_logged" string="Timesheet" readonly="1"/>
       </xpath>
     </field>
   </record>
