@@ -11,7 +11,7 @@ class CalendarToTimesheetWizard(models.TransientModel):
     duration = fields.Float(string="Duration (Hours)", compute='_compute_duration', store=True)
     project_id = fields.Many2one('project.project', string="Project", required=True)
     task_id = fields.Many2one('project.task', string="Task", domain="[('project_id', '=', project_id)]")
-    event_id = fields.Many2one('calendar.event', string="Event", readonly=True)
+    event_id = fields.Many2one('calendar.event', string="Calendar Event", readonly=True)
 
     @api.depends('date_time_start', 'date_time_end')
     def _compute_duration(self):
@@ -22,15 +22,19 @@ class CalendarToTimesheetWizard(models.TransientModel):
             else:
                 rec.duration = 0.0
 
+    @api.onchange('project_id')
+    def _onchange_project_id(self):
+        if self.task_id and self.task_id.project_id != self.project_id:
+            self.task_id = False
+
     def action_log_time(self):
         self.ensure_one()
         if self.duration <= 0:
             raise ValidationError(_("Duration must be greater than zero."))
 
-        # Optional: enforce task duration controls from project_timesheet_time_control
         if self.task_id and self.task_id.use_timesheet_control:
-            min_duration = self.task_id.min_time and self.task_id.min_time / 60.0 or 0.0
-            max_duration = self.task_id.max_time and self.task_id.max_time / 60.0 or 0.0
+            min_duration = (self.task_id.min_time or 0.0) / 60.0
+            max_duration = (self.task_id.max_time or 0.0) / 60.0
 
             if min_duration and self.duration < min_duration:
                 raise ValidationError(_(
@@ -47,3 +51,6 @@ class CalendarToTimesheetWizard(models.TransientModel):
             'task_id': self.task_id.id,
             'employee_id': self.env.user.employee_id.id,
         })
+
+        if self.event_id:
+            self.event_id.is_timesheet_logged = True

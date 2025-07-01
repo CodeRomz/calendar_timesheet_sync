@@ -1,8 +1,14 @@
-from odoo import models, api, _
+from odoo import models, fields, api, _
 from odoo.exceptions import AccessError
 
 class CalendarEvent(models.Model):
     _inherit = 'calendar.event'
+
+    is_timesheet_logged = fields.Boolean(
+        string="Timesheet Logged",
+        readonly=True,
+        help="Indicates whether this event has been logged into timesheet."
+    )
 
     def action_open_calendar_timesheet_wizard(self):
         self.ensure_one()

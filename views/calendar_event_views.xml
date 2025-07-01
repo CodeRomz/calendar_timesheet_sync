@@ -4,12 +4,16 @@
     <field name="model">calendar.event</field>
     <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
     <field name="arch" type="xml">
-      <xpath expr="//form/sheet" position="before">
+      <xpath expr="//form/sheet" position="inside">
         <button name="action_open_calendar_timesheet_wizard"
                 type="object"
                 string="Add to Timesheet"
                 class="btn-primary"
-                groups="hr_timesheet.group_hr_timesheet_user"/>
+                groups="hr_timesheet.group_hr_timesheet_user"
+                attrs="{'invisible': [('is_timesheet_logged', '=', True)]}"/>
+      </xpath>
+      <xpath expr="//sheet/group" position="inside">
+        <field name="is_timesheet_logged" readonly="1"/>
       </xpath>
     </field>
   </record>
