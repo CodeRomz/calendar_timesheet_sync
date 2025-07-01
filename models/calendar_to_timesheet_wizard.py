@@ -28,16 +28,16 @@ class CalendarToTimesheetWizard(models.TransientModel):
         if self.duration <= 0:
             raise ValidationError(_("Duration must be greater than zero."))
 
-        entry_vals = {
+        self.env['account.analytic.line'].create({
             'name': self.name,
-            'date': self.date_time_start,  # full datetime
+            'date_time': self.date_time_start,  # Start time (datetime)
             'unit_amount': self.duration,
             'project_id': self.project_id.id,
             'task_id': self.task_id.id,
             'employee_id': self.env.user.employee_id.id,
-        }
-        self.env['account.analytic.line'].create(entry_vals)
+        })
 
         if self.event_id:
             self.event_id.is_timesheet_logged = True
+
 
