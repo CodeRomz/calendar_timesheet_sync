@@ -32,24 +32,23 @@ class CalendarToTimesheetWizard(models.TransientModel):
 
     def action_log_time(self):
         self.ensure_one()
+
         if self.duration <= 0:
             raise ValidationError(_("Duration must be greater than zero."))
 
-        # ✅ Access duration limits from project_id (not task)
-        if self.task_id and self.task_id.project_id:
-            project = self.task_id.project_id
-            if project.use_timesheet_control:
-                min_duration = (project.min_time or 0.0) / 60.0
-                max_duration = (project.max_time or 0.0) / 60.0
+        # Enforce project_timesheet_time_control min/max from project.project
+        project = self.project_id
+        min_duration = (project.min_time or 0.0) / 60.0  # Convert minutes to hours
+        max_duration = (project.max_time or 0.0) / 60.0
 
-                if min_duration and self.duration < min_duration:
-                    raise ValidationError(_(
-                        "Duration is below the minimum allowed (%.2f h) for this project.") % min_duration)
-                if max_duration and self.duration > max_duration:
-                    raise ValidationError(_(
-                        "Duration exceeds the maximum allowed (%.2f h) for this project.") % max_duration)
+        if min_duration and self.duration < min_duration:
+            raise ValidationError(_(
+                "Duration is below the minimum allowed (%.2f h) for this project.") % min_duration)
 
-        # ✅ Create analytic line
+        if max_duration and self.duration > max_duration:
+            raise ValidationError(_(
+                "Duration exceeds the maximum allowed (%.2f h) for this project.") % max_duration)
+
         self.env['account.analytic.line'].create({
             'name': self.name,
             'date': self.date_time_start.date(),
@@ -59,6 +58,5 @@ class CalendarToTimesheetWizard(models.TransientModel):
             'employee_id': self.env.user.employee_id.id,
         })
 
-        # ✅ Update calendar event flag
         if self.event_id:
             self.event_id.is_timesheet_logged = True
