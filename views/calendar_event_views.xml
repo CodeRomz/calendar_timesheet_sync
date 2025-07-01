@@ -1,21 +1,23 @@
 <odoo>
-    <record id="view_calendar_event_form_inherit_timesheet_button" model="ir.ui.view">
-        <field name="name">calendar.event.form.timesheet.button</field>
+    <record id="view_calendar_event_form_inherit_timesheet_tab" model="ir.ui.view">
+        <field name="name">calendar.event.form.timesheet.notebook</field>
         <field name="model">calendar.event</field>
         <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//sheet/group" position="inside">
-                <group>
-                    <button name="action_open_calendar_timesheet_wizard"
-                            type="object"
-                            string="Add to Timesheet"
-                            class="btn-primary"
-                            groups="hr_timesheet.group_hr_timesheet_user"
-                            invisible="is_timesheet_logged"/>
-                </group>
-                <group>
-                    <field name="is_timesheet_logged" string="Timesheet" readonly="1"/>
-                </group>
+            <xpath expr="//notebook" position="inside">
+                <page string="Timesheet">
+                    <group>
+                        <button name="action_open_calendar_timesheet_wizard"
+                                type="object"
+                                string="Add to Timesheet"
+                                class="btn-primary"
+                                groups="hr_timesheet.group_hr_timesheet_user"
+                                invisible="is_timesheet_logged"/>
+                    </group>
+                    <group>
+                        <field name="is_timesheet_logged" string="Timesheet Status" readonly="1"/>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>
