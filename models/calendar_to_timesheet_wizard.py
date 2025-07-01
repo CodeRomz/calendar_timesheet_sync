@@ -22,7 +22,6 @@ class CalendarToTimesheetWizard(models.TransientModel):
             else:
                 rec.duration = 0.0
 
-    @api.onchange('project_id')
     def action_log_time(self):
         self.ensure_one()
 
