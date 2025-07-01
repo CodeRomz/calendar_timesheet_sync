@@ -7,15 +7,21 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Timesheet">
                     <group>
-                        <button name="action_open_calendar_timesheet_wizard"
-                                type="object"
-                                string="Add to Timesheet"
-                                class="btn-primary"
-                                groups="hr_timesheet.group_hr_timesheet_user"
-                                invisible="is_timesheet_logged"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_open_calendar_timesheet_wizard"
+                                    type="object"
+                                    string="Add to Timesheet"
+                                    class="btn btn-primary"
+                                    groups="hr_timesheet.group_hr_timesheet_user"
+                                    invisible="is_timesheet_logged"/>
+                        </div>
                     </group>
                     <group>
-                        <field name="is_timesheet_logged" string="Timesheet Status" readonly="1"/>
+                        <field name="is_timesheet_logged"
+                               string="Timesheet Status"
+                               readonly="1"
+                               widget="boolean_toggle"
+                               colspan="2"/>
                     </group>
                 </page>
             </xpath>
