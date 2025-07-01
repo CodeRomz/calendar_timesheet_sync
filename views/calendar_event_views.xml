@@ -9,7 +9,9 @@
                 type="object"
                 string="Add to Timesheet"
                 class="btn-primary"
-                groups="hr_timesheet.group_hr_timesheet_user"/>
+                groups="hr_timesheet.group_hr_timesheet_user"
+                invisible="is_timesheet_logged"/>
+
       </xpath>
       <xpath expr="//sheet/group" position="inside">
         <field name="is_timesheet_logged" readonly="1"/>
