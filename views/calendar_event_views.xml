@@ -12,7 +12,8 @@
                             class="btn-primary"
                             groups="hr_timesheet.group_hr_timesheet_user"
                             invisible="is_timesheet_logged"/>
-
+                </group>
+                <group>
                     <field name="is_timesheet_logged" string="Timesheet" readonly="1"/>
                 </group>
             </xpath>
