@@ -7,7 +7,7 @@ class CalendarEvent(models.Model):
     is_timesheet_logged = fields.Boolean(
         string="Timesheet Logged",
         readonly=True,
-        help="Indicates whether this event has been logged into timesheet."
+        help="Indicates whether this event has been logged into a timesheet."
     )
 
     def action_open_calendar_timesheet_wizard(self):
