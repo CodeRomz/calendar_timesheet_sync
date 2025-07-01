@@ -1,8 +1,5 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-import logging
-
-_logger = logging.getLogger(__name__)
 
 class CalendarToTimesheetWizard(models.TransientModel):
     _name = 'calendar.to.timesheet.wizard'
@@ -35,19 +32,6 @@ class CalendarToTimesheetWizard(models.TransientModel):
 
         if self.duration <= 0:
             raise ValidationError(_("Duration must be greater than zero."))
-
-        # Enforce project_timesheet_time_control min/max from project.project
-        project = self.project_id
-        min_duration = (project.min_time or 0.0) / 60.0  # Convert minutes to hours
-        max_duration = (project.max_time or 0.0) / 60.0
-
-        if min_duration and self.duration < min_duration:
-            raise ValidationError(_(
-                "Duration is below the minimum allowed (%.2f h) for this project.") % min_duration)
-
-        if max_duration and self.duration > max_duration:
-            raise ValidationError(_(
-                "Duration exceeds the maximum allowed (%.2f h) for this project.") % max_duration)
 
         self.env['account.analytic.line'].create({
             'name': self.name,
