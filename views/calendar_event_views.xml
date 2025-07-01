@@ -12,7 +12,7 @@
                                     type="object"
                                     string="Add to Timesheet"
                                     class="btn btn-primary"
-                                    style="white-space: nowrap; padding: 0.5rem 1.2rem;"
+                                    style="white-space: nowrap; height: 38px; line-height: 1.2; padding: 0 1.2rem; font-weight: 500;"
                                     groups="hr_timesheet.group_hr_timesheet_user"
                                     invisible="is_timesheet_logged"/>
                             <div class="d-flex align-items-center" style="white-space: nowrap;">
