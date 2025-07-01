@@ -31,7 +31,7 @@ class CalendarToTimesheetWizard(models.TransientModel):
         self.env['account.analytic.line'].create({
             'name': self.name,
             'date_time': self.date_time_start,  # Start time (datetime)
-            'date_time_end': self.date_time_end,  # Start time (datetime)
+            'date_time_end': self.date_time_end,  # End time (datetime)
             'unit_amount': self.duration,
             'project_id': self.project_id.id,
             'task_id': self.task_id.id,
