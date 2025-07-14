@@ -13,8 +13,7 @@
                                     string="Add to Timesheet"
                                     class="btn btn-primary"
                                     style="white-space: nowrap; height: 38px; line-height: 1.2; padding: 0 1.2rem; font-weight: 500;"
-                                    groups="hr_timesheet.group_hr_timesheet_user"
-                                    invisible="is_timesheet_logged"/>
+                                    groups="hr_timesheet.group_hr_timesheet_user"/> <!--invisible="is_timesheet_logged"-->
                             <div class="d-flex align-items-center" style="white-space: nowrap;">
                                 <span class="me-2" style="white-space: nowrap;">Timesheet Logged</span>
                                 <field name="is_timesheet_logged"
